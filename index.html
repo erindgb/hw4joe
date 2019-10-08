@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Joe's Hotdogs</title>
+
+  <style>
+  html {
+    padding: 20px 20px
+  }
+
+  h4 {
+    font-family: "arial";
+    font-weight: normal
+  }
+
+  body,
+  script {
+    font-family: "arial";
+    font-size: 20px;
+    font-weight: bold
+  }
+  </style>
+
+  <script language="javascript" type="text/javascript">
+
+    var hotdogs = {
+      name: "Hotdogs",
+      price: 3.25
+    };
+    var fries = {
+      name: "French Fries",
+      price: 2.00
+    };
+    var drinks = {
+      name: "Drinks",
+      price: 1.50
+    };
+    var hotdogs_ordered = {
+      name: "Hotdogs",
+      quantity: 0
+    };
+    var fries_ordered = {
+      name: "French Fries",
+      quantity: 0
+    };
+    var drinks_ordered = {
+      name: "Drinks",
+      quantity: 0
+    };
+
+    function determine_total() {
+      hotdogs_ordered.quantity = document.getElementById("hotdogs_ordered").value;
+      fries_ordered.quantity = document.getElementById("fries_ordered").value;
+      drinks_ordered.quantity = document.getElementById("drinks_ordered").value;
+
+      var subtotal = parseFloat((hotdogs.price * hotdogs_ordered.quantity) +
+        (fries.price * fries_ordered.quantity) +
+        (drinks.price * drinks_ordered.quantity));
+
+      var total = 0;
+      var discount = 0;
+      var tax = 0;
+
+      if (subtotal >= 20) {
+        discount = subtotal * 0.10;
+        total = subtotal - discount;
+      }
+
+      tax = total * 0.0625;
+      total = total + tax;
+
+      alert("Thank you! \nYou have ordered " +
+        hotdogs_ordered.quantity + " " + hotdogs.name + ", " +
+        fries_ordered.quantity + " " + fries.name + ", and " +
+        drinks_ordered.quantity + " " + drinks.name + ". \n \n" +
+        "Subtotal: $" + subtotal.toFixed(2) +
+        "\nDiscount: $" + discount.toFixed(2) +
+        "\nTax: $" + tax.toFixed(2) +
+        "\nTotal amount: $" + total.toFixed(2));
+    }
+  </script>
+</head>
+<body>
+
+  <form>
+    <h2>Welcome to Joe's Hotdogs! <br> What would you like today?</h2>
+    <h4>Hotdogs</h4>
+    <input type="number" name="hotdogs_ordered" id="hotdogs_ordered" min="0">
+    <h4>French Fries</h4>
+    <input type="number" name="fries_ordered" id="fries_ordered" min="0">
+    <h4>Drinks</h4>
+    <input type="number" name="drinks_ordered" id="drinks_ordered" min="0">
+    <p><input type="button" value="Go!" id="submit_order" onclick="return determine_total();">
+  </form>
+
+  <p><a href="erindgb.github.io/hw4lottery">Click here for HW4 Part 1.</a>
+
+</body>
+</html>
